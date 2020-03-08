@@ -1,0 +1,14 @@
+.App{
+    margin:0;
+    height:100%;
+    width:100%;
+  }
+  
+  .canvas-container {
+    height: 60vh;
+  }
+
+html,body,#root{
+  height:100%;
+  margin:0;
+}
