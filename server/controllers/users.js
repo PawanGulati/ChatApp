@@ -14,6 +14,11 @@ const addUser = ({id,name,room}) =>{
 
     const user = {id,name,room}
 
+    users.push(user)
+
+    // console.log(users);
+    
+
     return {user}
 }
 
@@ -25,6 +30,8 @@ const removeUser = ({id})=>{
     }
 
     const [user] = users.splice(userIndex,1)
+    console.log(users,user); 
+    
 
     return {user}
 }
@@ -32,10 +39,13 @@ const removeUser = ({id})=>{
 const getUser = ({id}) =>{
     const userArr = users.filter(user=>user.id === id)
 
+    console.log(users);
+
+
     if(userArr.length === 0){
         return {error:'user not exists'}
     }
-    const [user] = userArr
+    const [user] = userArr 
 
     return {user}
 }
