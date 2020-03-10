@@ -1,18 +1,26 @@
 import React from 'react'
 import ScrollToBottom from 'react-scroll-to-bottom'
 
-import { Container } from '@material-ui/core'
+import { Container,makeStyles } from '@material-ui/core'
+import Message from './Message'
 
-export default function Messages({messages}) {
+const useStyles = makeStyles(theme=>({
+    messages:{
+        overflow:'auto',
+        flex:'auto',
+        padding:'30px',
+        height:'90%'
+    }
+}))
+
+export default function Messages({messages,curName}) {
+    const classes = useStyles()
     return (
-        <Container style={{padding:'30px'}}>
-            <ScrollToBottom>
-                {messages.map((message,i)=>(
-                    <div key={i}>
-                        {message.message} - {message.name}
-                    </div>    
-                ))}
-            </ScrollToBottom>
-        </Container>
-    )
+        <ScrollToBottom className={classes.messages}>
+            {messages.map((message,i)=>(
+                <Message curName={curName} name={message.name} key={i}>{message.message} </Message>    
+            ))}                    
+        </ScrollToBottom>
+        )
 }
+

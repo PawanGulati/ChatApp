@@ -71,7 +71,7 @@ export default withStyles(styles)(class Join extends Component{
                                     variant='outlined' 
                                     color='secondary' 
                                     endIcon={<ExitToAppIcon/>} 
-                                    style={{marginTop:'50px'}}
+                                    style={{marginTop:'30px'}}
                                 > JOIN </Button>
                             </Link>
                         </form> 

@@ -7,7 +7,15 @@ export default function ChatFoot(props) {
         <Container style={{padding:'10px',height:'10%'}}>
             <Grid container>
                 <Grid item xs={10}>
-                    <TextField fullWidth variant='outlined' name='message' value={props.message} autoComplete='off' onChange={(e)=>{props.inputHandler(e)}}/>
+                    <TextField 
+                        fullWidth 
+                        variant='outlined' 
+                        name='message' 
+                        value={props.message} 
+                        autoComplete='off' 
+                        onChange={(e)=>{props.inputHandler(e)}}
+                        onKeyPress={(e)=>e.key==='Enter'?props.send(e):null}    
+                    />
                 </Grid>
                 <Grid item>
                     <Button 
