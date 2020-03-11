@@ -58,7 +58,15 @@ io.on('connection', socket => {
 
 
 app.get('/',(req,res)=>res.send('server\'s running test successful'))
-app.use(cors)
+app.use(cors())
+
+if(process.env.NODE_ENV === 'production'){
+    app.use(express.static('../client/build'))
+
+    app.get('*',(req,res) =>{
+        res.sendFile(path.resolve(__dirname,'..','client','build','index.html'))
+    })          
+}
 
 const port = process.env.PORT || 8080   
 server.listen(port,()=>console.log(`server\' up @${port}`))
