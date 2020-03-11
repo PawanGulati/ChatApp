@@ -8,7 +8,7 @@ import SideBar from '../SideBar/SideBar'
 import Messages from '../Messages/Messages'
 import ChatFoot from '../ChatFoot'
 
-const ENDPOINT = 'https://chat-app-pawan.herokuapp.com/ || http://127.0.0.1:8080' 
+const ENDPOINT = 'https://chat-app-pawan.herokuapp.com' 
 let socket
 
 const styles = theme =>({
