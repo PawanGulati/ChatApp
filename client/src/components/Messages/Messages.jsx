@@ -9,7 +9,8 @@ const useStyles = makeStyles(theme=>({
         overflow:'auto',
         flex:'auto',
         padding:'30px',
-        height:'90%'
+        height:'100%',
+        background:'rgb(215,89,93,0.1)',
     }
 }))
 

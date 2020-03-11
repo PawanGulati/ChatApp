@@ -1,11 +1,10 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import {makeStyles} from '@material-ui/core'
 
 const useStyles = makeStyles(theme=>({
     root:{
         background:'#272C34',
         height:'100%',
-        
     }
 }))
 

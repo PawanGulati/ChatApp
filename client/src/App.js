@@ -11,8 +11,8 @@ export default function App() {
     return (
         <>
             <CssBaseline/>
-            <Route path='/' exact component={Join} />
-            <Route path='/Chat' component={Chat} />
+                <Route path='/' exact component={Join} />
+                <Route path='/ChatPage' component={Chat} />
         </>
     )
 }

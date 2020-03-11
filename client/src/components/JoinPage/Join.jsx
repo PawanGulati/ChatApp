@@ -6,13 +6,16 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const styles = theme =>({
     container:{
-        marginTop:'15%',
+        paddingTop:'15%',
         textAlign:'center',
         fontFamily:'Barlow',
-        color:'secondary'
+        color:'secondary',
+        [theme.breakpoints.down('sm')]:{
+            paddingTop:'40%'
+        }
     },
     paper:{
-        height:'300px',
+        height:'20rem',
         padding:'15px',
         boxShadow:'0.1px 0.1px 10px #D7595D inset'
     },
@@ -65,7 +68,7 @@ export default withStyles(styles)(class Join extends Component{
                                 onChange={this.inputHandler}
                                 required
                             />
-                            <Link to={`/Chat?name=${this.state.name}&room=${this.state.room}`} style={{textDecoration:'none '}}>
+                            <Link to={`/ChatPage?name=${this.state.name}&room=${this.state.room}`} style={{textDecoration:'none '}}>
                                 <Button 
                                     type='submit'
                                     variant='outlined' 

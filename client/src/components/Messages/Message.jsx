@@ -5,7 +5,7 @@ import { Paper, makeStyles } from '@material-ui/core'
 
 const useStyles = makeStyles(theme=>({
     paper:{
-        maxWidth:'200px',
+        overflowWrap:'break-word',
         border:'1px solid',
         padding:'0.4rem',
         display:'block',
@@ -13,18 +13,27 @@ const useStyles = makeStyles(theme=>({
         marginTop:'20px'
     },
     curUser:{
+        maxWidth:'200px',
         marginLeft:'70%',
-        background:'#E8E8E8'
+        background:'#E8E8E8',
+        [theme.breakpoints.down('sm')]:{
+            marginLeft:'33%',
+        }
     },
     admin:{ 
+        maxWidth:'10em',
         position:'relative',
         left:'40%',
         background:'#C0C0C0',
-        textAlign:'center'
+        textAlign:'center',
+        [theme.breakpoints.down('sm')]:{
+            left:'30%',
+        }
     },
     otherUser:{
         // position:'relative',
         // right:0,
+        maxWidth:'200px',
         background:'#D7595D',
         color:'white'
     }

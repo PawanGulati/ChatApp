@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import QueryString from 'query-string'
 import io from 'socket.io-client'
 
-import {Grid} from '@material-ui/core'
+import {Grid,withStyles, Divider} from '@material-ui/core'
 
 import SideBar from '../SideBar/SideBar'
 import Messages from '../Messages/Messages'
@@ -11,8 +11,36 @@ import ChatFoot from '../ChatFoot'
 const ENDPOINT = 'http://127.0.0.1:8080' 
 let socket
 
-export default class Chat extends Component {
+const styles = theme =>({
+    sideBar:{
+        height:'100%',
+        [theme.breakpoints.down('sm')]:{
+            height:'15%'
+        }
+    },
+    chatBox:{
+        height:'100%',
+        [theme.breakpoints.down('sm')]:{
+            height:'85%'
+        }
+    },
+    chatPanel:{
+        height:'90%',
+        width:'100%',
+        [theme.breakpoints.down('sm')]:{
+            height:'85%'
+        }
+    },
+    inputBox:{
+        height:'10%',
+        borderTop:'1.1px solid #BEBEBE',
+        [theme.breakpoints.down('sm')]:{
+            height:'15%'
+        }
+    },
+})
 
+export default withStyles(styles)(class Chat extends Component {
     state={
         name:'',
         room:'',
@@ -110,20 +138,21 @@ export default class Chat extends Component {
     }
 
     render(){
+        const {classes} = this.props
         return (
             <Grid container style={{height:'100%'}}>
-                <Grid item xs={3} style={{height:'100%'}}>
+                <Grid item xs={12} md={3} className={classes.sideBar}>
                     <SideBar room={this.state.room} users={this.state.users}/>
                 </Grid>
-                <Grid item xs={9} style={{height:'100%'}}>
-                    <Grid item xs={12} style={{height:'calc(100% - 72px)'}}>
+                <Grid item xs={12} md={9} className={classes.chatBox}>
+                    <Grid item xs={12} className={classes.chatPanel}>
                         <Messages messages={this.state.messages} curName={this.state.name}/>
                     </Grid>
-                    <Grid item xs={12} style={{height:'10%'}}>
+                    <Grid item xs={12} className={classes.inputBox}>
                         <ChatFoot inputHandler={this.inputHandler} message={this.state.message} send={this.sendMessageHandler}/>
                     </Grid>
                 </Grid>
             </Grid>
         )
     }
-}
+})
