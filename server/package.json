@@ -5,7 +5,6 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false cd ../client/ && npm install && npm run build",
     "client-install": "npm install --prefix client",
     "server": "nodemon index.js",
     "client": "cd ../client/ && npm start ",
@@ -23,5 +22,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
+  },
+  "engines": {
+    "node": "10.14.1"
   }
 }

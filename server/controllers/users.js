@@ -50,7 +50,7 @@ const getUser = ({id}) =>{
     return {user}
 }
 
-const getUsersInRoom = ({room}) =>{
+const getUsersInRoom = (room) =>{
     const usersArr = users.filter(user=>user.room === room)
     
     return usersArr

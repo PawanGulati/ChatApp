@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme=>({
     },
     container:{
         paddingTop:'10px',
-        background:'rgb(215,89,93,0.1)',
+        background:'rgba(245, 0, 87,.2)',
     }
 }))
 
@@ -33,7 +33,8 @@ export default withWidth()(function ChatFoot(props) {
                         autoFocus
                         autoComplete='off' 
                         onChange={(e)=>{props.inputHandler(e)}}
-                        onKeyPress={(e)=>e.key==='Enter'?props.send(e):null}  
+                        onKeyPress={(e)=>e.key==='Enter'?props.send(e):null} 
+                        style={{background:'rgba(245, 0, 87,.1)'}} 
                     />
                 </Grid>
                 <Grid item xs={2} style={{textAlign:'center'}}>
@@ -53,7 +54,7 @@ export default withWidth()(function ChatFoot(props) {
                         color="primary" 
                         aria-label="add" 
                         className={classes.button}
-                        onClick={(e)=>{props.send(e)}}
+                        onClick={(e)=>{props.location(e)}}
                     >
                         <LocationOnIcon />
                     </Fab>
@@ -62,27 +63,3 @@ export default withWidth()(function ChatFoot(props) {
         </Container>
     )
 })
-
-// <Grid item xs={2}>
-//                     <Button 
-//                         variant='contained' 
-//                         color="secondary" 
-//                         style={{margin:'0 15px',height:'56px'}} 
-//                         endIcon={<SendIcon/>}
-//                         onClick={(e)=>{props.send(e)}}
-//                         className={classes.button}    
-//                         size='small'
-//                     >{width!=='xs'||width==='sm'?`SEND`:null}</Button>
-//                 </Grid>
-//                 <Grid item xs={2}>
-//                     <Button 
-//                         variant='contained' 
-//                         color="secondary" 
-//                         style={{margin:'0 15px',height:'56px'}} 
-//                         endIcon={<LocationOnIcon/>}
-//                         onClick={(e)=>{props.send(e)}}
-//                         className={classes.button}
-//                         size='small'
-
-//                     >{width!=='xs'||width==='sm'?`LOCATION`:null}</Button>
-//                 </Grid> 
