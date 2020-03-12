@@ -28,21 +28,44 @@ io.on('connection', socket => {
         socket.emit('serverMessage','Welcome')
         socket.broadcast.to(room).emit('serverMessage',`${name} joined room`)
 
+        io.to(room).emit('roomData',{
+            room:room,
+            users:getUsersInRoom(room)
+        })
+
         cb()
     })
     
     socket.on('sendMessage',(message,cb)=>{
         const {error,user} = getUser({id:socket.id})
 
-        console.log("debg ",user);
+        if(error){
+            return cb(error)
+        }
+
+        name = user['name']
+
+        io.to(user.room).emit('message',{message,name})
+  
+        cb()
+    })
+
+    socket.on('sendLocation',({latitude,longitude},cb)=>{
+        const {error,user} = getUser({id:socket.id})
 
         if(error){
             return cb(error)
         }
 
         name = user['name']
-        console.log("debg ",name);
-        io.to(user.room).emit('message',{message,name})
+        console.log(name,latitude,longitude);
+                
+        const message = `https://google.com/maps?q=${latitude},${longitude}`
+
+        const locationUrl=true
+
+        io.to(user.room).emit('message',{message,name,locationUrl})
+
         cb()
     })
 
@@ -51,8 +74,13 @@ io.on('connection', socket => {
         if(error){
             return console.log(error);
         }
-
-        io.to(user.room).emit('serverMessage',`${user.name} left`)
+        if(user){
+            io.to(user.room).emit('serverMessage',`${user.name} left`)
+            io.to(user.room).emit('roomData',{
+                room:user.room,
+                users:getUsersInRoom(user.room)
+            })
+        }
     })
 })
 

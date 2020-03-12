@@ -31,25 +31,29 @@ const useStyles = makeStyles(theme=>({
         }
     },
     otherUser:{
-        // position:'relative',
-        // right:0,
         maxWidth:'200px',
         background:'#D7595D',
         color:'white'
+    },
+    location:{
+        maxWidth:'50px',
+        marginLeft:'90%',
+        [theme.breakpoints.down('sm')]:{
+            marginLeft:'83%',
+        }
     }
 }))
 
-export default function Message({curName,name,children}) {
+export default function Message({curName,name,children,locationUrl}) {
     const classes = useStyles()    
-    console.log(curName,name);
-    
     
     const curUser = name === curName ? classes.curUser : null
     const admin = name === 'admin' ? classes.admin : null
     const otherUser = (name !== 'admin' && name !==  curName)  ? classes.otherUser : null
+    const location = locationUrl ? classes.location : null
 
     return (
-            <Paper className={`${classes.paper} ${curUser} ${otherUser} ${admin}`} >
+            <Paper className={`${classes.paper} ${curUser} ${otherUser} ${admin} ${location}`} >
                 {children}
             </Paper>
     )

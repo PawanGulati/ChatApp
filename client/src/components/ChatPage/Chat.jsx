@@ -7,8 +7,8 @@ import {Grid,withStyles, Divider} from '@material-ui/core'
 import SideBar from '../SideBar/SideBar'
 import Messages from '../Messages/Messages'
 import ChatFoot from '../ChatFoot'
-
-const ENDPOINT = 'https://chat-app-pawan.herokuapp.com' 
+// ||'https://chat-app-pawan.herokuapp.com'
+const ENDPOINT = 'http://127.0.0.1:8080' 
 let socket
 
 const styles = theme =>({
@@ -45,7 +45,8 @@ export default withStyles(styles)(class Chat extends Component {
         name:'',
         room:'',
         message:'',
-        messages:[]
+        messages:[],
+        users:[]
     }
 
     componentDidMount(){
@@ -59,10 +60,9 @@ export default withStyles(styles)(class Chat extends Component {
             room
         })
         
-        socket = io.connect(ENDPOINT,{reconnection:true})
+        socket = io.connect(ENDPOINT,{reconnection:true,secure:true})
 
-        console.log(name,room);
-        
+        console.log(socket);
 
         socket.emit('join',{name,room},(error)=>{
             //acknowledgements
@@ -71,15 +71,29 @@ export default withStyles(styles)(class Chat extends Component {
             }
             console.log('message delivered!');
         })
-        
 
-        socket.on('message',({message,name})=>{
+        socket.on('roomData',({room,users})=>{
+            console.log(room,users);
+            this.setState({
+                users
+            })
+        })
+
+        socket.on('message',({message,name,locationUrl})=>{
             console.log("userMessage :: ",message);
-            //store in messages 
-            const data = {
+            //store in messages
+            if(locationUrl){
+                console.log('location given');
+            }
+            
+            const data = locationUrl?{
+                message,
+                name,
+                locationUrl
+            }:{
                 message,
                 name
-            } 
+            }
             console.log("userMessage data :: ",data);
             
             const newMessages = [...this.state.messages]    
@@ -137,6 +151,25 @@ export default withStyles(styles)(class Chat extends Component {
         }
     }
 
+    sendLocationHandler=(e)=>{
+        e.preventDefault()
+        
+        if(!navigator.geolocation){
+            return alert('geolocation not supported!')
+        }
+
+        navigator.geolocation.getCurrentPosition(position=>{
+            const{coords:{latitude,longitude}} = position
+
+            socket.emit('sendLocation',{latitude,longitude},(error)=>{
+                if(error){
+                    return console.log(error);
+                }
+                console.log('location delivered!');
+            })
+        })
+    }
+
     render(){
         const {classes} = this.props
         return (
@@ -149,7 +182,7 @@ export default withStyles(styles)(class Chat extends Component {
                         <Messages messages={this.state.messages} curName={this.state.name}/>
                     </Grid>
                     <Grid item xs={12} className={classes.inputBox}>
-                        <ChatFoot inputHandler={this.inputHandler} message={this.state.message} send={this.sendMessageHandler}/>
+                        <ChatFoot inputHandler={this.inputHandler} message={this.state.message} send={this.sendMessageHandler} location={this.sendLocationHandler}/>
                     </Grid>
                 </Grid>
             </Grid>
