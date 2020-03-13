@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme=>({
         marginLeft:'70%',
         background:'#E8E8E8',
         [theme.breakpoints.down('sm')]:{
-            marginLeft:'33%',
+            marginLeft:'calc(100% - 200px)',
         }
     },
     admin:{ 
