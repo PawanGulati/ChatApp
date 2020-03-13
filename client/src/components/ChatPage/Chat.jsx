@@ -140,7 +140,7 @@ export default withStyles(styles)(class Chat extends Component {
         console.log("debg ",message);
         
         if(message){
-            socket.emit('sendMessage',message,(error)=>{
+            socket.emit('sendMessage',message ,(error)=>{
                 if(error){
                     return console.log({error});
                 }

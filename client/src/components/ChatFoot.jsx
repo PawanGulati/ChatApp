@@ -1,7 +1,10 @@
 import React from 'react'
-import { Container, Grid, TextField, Button,makeStyles,withWidth, Fab } from '@material-ui/core'
+// import {Picker} from 'emoji-mart'
+
+import { Container, Grid, TextField, Button,makeStyles,withWidth, Fab, InputAdornment } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
+import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 
 const useStyles = makeStyles(theme=>({
     button:{
@@ -13,6 +16,7 @@ const useStyles = makeStyles(theme=>({
     container:{
         paddingTop:'10px',
         background:'rgba(245, 0, 87,.2)',
+        height:'100%'
     }
 }))
 
@@ -35,6 +39,15 @@ export default withWidth()(function ChatFoot(props) {
                         onChange={(e)=>{props.inputHandler(e)}}
                         onKeyPress={(e)=>e.key==='Enter'?props.send(e):null} 
                         style={{background:'rgba(245, 0, 87,.1)'}} 
+                        InputProps={{
+                            startAdornment: (
+                              <InputAdornment position="start">
+                                <EmojiEmotionsIcon
+                                    color='secondary'
+                                />
+                              </InputAdornment>
+                            ),
+                        }}
                     />
                 </Grid>
                 <Grid item xs={2} style={{textAlign:'center'}}>
