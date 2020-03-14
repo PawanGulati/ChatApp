@@ -38,7 +38,7 @@ export default withWidth()(function ChatFoot(props) {
                         autoComplete='off' 
                         onChange={(e)=>{props.inputHandler(e)}}
                         onKeyPress={(e)=>e.key==='Enter'?props.send(e):null} 
-                        style={{background:'rgba(245, 0, 87,.1)'}} 
+                        style={{background:'rgba(245, 0, 87,.1)',height:'100%'}} 
                         InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
@@ -57,6 +57,7 @@ export default withWidth()(function ChatFoot(props) {
                         aria-label="add" 
                         className={classes.button}
                         onClick={(e)=>{props.send(e)}}
+                        style={{height:'100%'}}
                     >
                         <SendIcon />
                     </Fab>
@@ -68,6 +69,7 @@ export default withWidth()(function ChatFoot(props) {
                         aria-label="add" 
                         className={classes.button}
                         onClick={(e)=>{props.location(e)}}
+                        style={{height:'100%'}}
                     >
                         <LocationOnIcon />
                     </Fab>
