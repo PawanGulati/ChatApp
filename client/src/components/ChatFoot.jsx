@@ -38,7 +38,7 @@ export default withWidth()(function ChatFoot(props) {
                         autoComplete='off' 
                         onChange={(e)=>{props.inputHandler(e)}}
                         onKeyPress={(e)=>e.key==='Enter'?props.send(e):null} 
-                        style={{background:'rgba(245, 0, 87,.1)',height:'100%'}} 
+                        style={{background:'rgba(245, 0, 87,.1)'}} 
                         InputProps={{
                             startAdornment: (
                               <InputAdornment position="start">
